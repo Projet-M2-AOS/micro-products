@@ -1,10 +1,22 @@
-import {ArrayMaxSize, IsArray, IsNumber, IsOptional, IsPositive, IsString, Length, Max, Min} from "class-validator";
+import {
+    ArrayMaxSize,
+    IsArray,
+    IsNumber,
+    IsOptional,
+    IsPositive,
+    IsString,
+    IsUrl,
+    Length,
+    Max,
+    Min
+} from "class-validator";
 
 export class UpdateProductDto {
 
     @IsOptional()
     @IsArray()
     @ArrayMaxSize(15)
+    @IsUrl({each : true})
     imageUrls?: string[]
 
     @IsOptional()

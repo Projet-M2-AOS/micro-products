@@ -13,6 +13,7 @@ import {ProductsService} from "./products.service";
 import {Product} from "./product.schema";
 import {CreateProductDto} from "./dto/create.product.dto";
 import {UpdateProductDto} from "./dto/update.product.dto";
+import {ObjectId} from "mongoose";
 
 @Controller('products')
 export class ProductsController {
@@ -25,7 +26,7 @@ export class ProductsController {
     }
 
     @Get(':idProduct')
-    async getProductById(@Param('idProduct') id: string): Promise<Product> {
+    async getProductById(@Param('idProduct') id: ObjectId): Promise<Product> {
         const product = await this.productsService.findById(id)
 
         if (!product) {
@@ -46,7 +47,7 @@ export class ProductsController {
     }
 
     @Put(':idProduct')
-    async updateProduct(@Param('idProduct') id: string, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
+    async updateProduct(@Param('idProduct') id: ObjectId, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
         let product: Product;
 
         try {
@@ -70,7 +71,7 @@ export class ProductsController {
 
     @Delete(':idProduct')
     @HttpCode(HttpStatus.NO_CONTENT)
-    async deleteProduct(@Param('idProduct') id: string) {
+    async deleteProduct(@Param('idProduct') id: ObjectId) {
         let product: Product;
         try {
             product = await this.productsService.findById(id)

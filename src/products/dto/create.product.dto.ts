@@ -1,10 +1,22 @@
-import {ArrayMaxSize, IsNotEmpty, IsArray, IsNumber, Min, Max, Length, IsString, IsPositive} from "class-validator";
+import {
+    ArrayMaxSize,
+    IsNotEmpty,
+    IsArray,
+    IsNumber,
+    Min,
+    Max,
+    Length,
+    IsString,
+    IsPositive,
+    IsUrl
+} from "class-validator";
 
 export class CreateProductDto {
 
     @IsNotEmpty()
     @IsArray()
     @ArrayMaxSize(15)
+    @IsUrl({each : true})
     imageUrls: string[]
 
     @IsNotEmpty()

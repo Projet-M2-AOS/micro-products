@@ -12,11 +12,10 @@ import {
 } from "class-validator";
 
 export class CreateProductDto {
-
     @IsNotEmpty()
     @IsArray()
     @ArrayMaxSize(15)
-    @IsUrl({each : true})
+    @IsUrl({}, {each: true})
     imageUrls: string[]
 
     @IsNotEmpty()

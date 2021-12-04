@@ -14,6 +14,10 @@ export class ProductsService {
         return createdProduct.save();
     }
 
+    async createMany(createManyProductType: CreateProductDto[]): Promise<Product[]> {
+        return this.productModel.insertMany(createManyProductType);
+    }
+
     delete(id: ObjectId) {
         return this.productModel.findByIdAndDelete(id).exec()
     }

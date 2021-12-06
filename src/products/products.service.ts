@@ -3,6 +3,7 @@ import {InjectModel} from "@nestjs/mongoose";
 import {Product, ProductDocument} from "./product.schema";
 import {Model, ObjectId} from "mongoose";
 import {CreateProductDto} from "./dto/create.product.dto";
+import {UpdateProductDto} from "./dto/update.product.dto";
 
 @Injectable()
 export class ProductsService {
@@ -18,7 +19,7 @@ export class ProductsService {
         return this.productModel.findByIdAndDelete(id).exec()
     }
 
-    update(id: ObjectId, partialProduct: Partial<Product>) {
+    update(id: ObjectId, partialProduct: UpdateProductDto) {
         return this.productModel.findByIdAndUpdate(id, partialProduct).exec()
     }
 

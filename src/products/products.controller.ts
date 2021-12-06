@@ -6,6 +6,7 @@ import {
     HttpCode, HttpException,
     HttpStatus,
     Param,
+    ParseArrayPipe,
     Post,
     Put
 } from '@nestjs/common';
@@ -38,9 +39,9 @@ export class ProductsController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    async createProduct(@Body() createProductDto: CreateProductDto) {
+    async createProduct(@Body(new ParseArrayPipe({ items: CreateProductDto })) createProductDto: CreateProductDto[]) {
         try {
-            return await this.productsService.create(createProductDto)
+            return await this.productsService.createMany(createProductDto)
         } catch (e) {
             throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
         }

@@ -3,6 +3,6 @@ import {MongooseModule} from "@nestjs/mongoose";
 import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/products'), ProductsModule],
+  imports: [MongooseModule.forRoot(process.env.MONGO_URL), ProductsModule],
 })
 export class AppModule {}

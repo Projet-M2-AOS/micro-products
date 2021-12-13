@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Product, ProductDocument} from "./product.schema";
-import {Model, ObjectId} from "mongoose";
+import {FilterQuery, Model, ObjectId} from "mongoose";
 import {CreateProductDto} from "./dto/create.product.dto";
 import {UpdateProductDto} from "./dto/update.product.dto";
 
@@ -27,8 +27,8 @@ export class ProductsService {
         return this.productModel.findByIdAndUpdate(id, partialProduct).exec()
     }
 
-    async findAll(): Promise<Product[]> {
-        return this.productModel.find().exec();
+    async find(filter: FilterQuery<ProductDocument>): Promise<Product[]> {
+        return this.productModel.find(filter).exec();
     }
 
     async findById(id: ObjectId): Promise<Product> {

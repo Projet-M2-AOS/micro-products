@@ -15,6 +15,7 @@ import {Product} from "./product.schema";
 import {CreateProductDto} from "./dto/create.product.dto";
 import {UpdateProductDto} from "./dto/update.product.dto";
 import {ObjectId} from "mongoose";
+import {ParseObjectIdPipe} from "../pipe/parse-mongoose-id.pipe";
 
 @Controller('products')
 export class ProductsController {
@@ -22,12 +23,12 @@ export class ProductsController {
     }
 
     @Get()
-    getAllProducts(): Promise<Product[]> {
-        return this.productsService.findAll()
+    getProducts(): Promise<Product[]> {
+        return this.productsService.find({})
     }
 
     @Get(':idProduct')
-    async getProductById(@Param('idProduct') id: ObjectId): Promise<Product> {
+    async getProductById(@Param('idProduct', ParseObjectIdPipe) id: ObjectId): Promise<Product> {
         const product = await this.productsService.findById(id)
 
         if (!product) {
@@ -48,7 +49,7 @@ export class ProductsController {
     }
 
     @Put(':idProduct')
-    async updateProduct(@Param('idProduct') id: ObjectId, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
+    async updateProduct(@Param('idProduct', ParseObjectIdPipe) id: ObjectId, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
         let product: Product;
 
         try {
@@ -72,7 +73,7 @@ export class ProductsController {
 
     @Delete(':idProduct')
     @HttpCode(HttpStatus.NO_CONTENT)
-    async deleteProduct(@Param('idProduct') id: ObjectId) {
+    async deleteProduct(@Param('idProduct', ParseObjectIdPipe) id: ObjectId) {
         let product: Product;
         try {
             product = await this.productsService.findById(id)

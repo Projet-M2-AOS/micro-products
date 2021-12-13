@@ -6,7 +6,7 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product {
-    @ApiProperty({type: String})
+    @ApiProperty({type: String, format: 'mongo-id',})
     _id: ObjectId
 
     @Prop([String])

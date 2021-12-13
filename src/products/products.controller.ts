@@ -42,7 +42,8 @@ export class ProductsController {
         description: 'The id of the product you want to get',
         required: true,
         schema: {
-            type: 'string'
+            type: 'string',
+            format: 'mongo-id'
         }
     })
     @ApiResponse({status: HttpStatus.OK, type: Product})
@@ -83,7 +84,8 @@ export class ProductsController {
         description: 'The id of the list you want to update',
         required: true,
         schema: {
-            type: 'string'
+            type: 'string',
+            format: 'mongo-id'
         }
     })
     @ApiResponse({status: HttpStatus.OK, type: Product, description: 'The product updated'})
@@ -121,7 +123,8 @@ export class ProductsController {
         description: 'The id of the list you want to delete',
         required: true,
         schema: {
-            type: 'string'
+            type: 'string',
+            format: 'mongo-id'
         }
     })
     @ApiResponse({status: HttpStatus.NO_CONTENT, description: 'Successfully deleted'})

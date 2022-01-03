@@ -17,7 +17,7 @@ export class UpdateProductDto {
     @IsOptional()
     @IsArray()
     @ArrayMaxSize(15)
-    @IsUrl({each : true})
+    @IsUrl({}, {each : true})
     @ApiProperty({required: false, maxItems: 15})
     imageUrls?: string[]
 
